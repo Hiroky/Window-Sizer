@@ -40,6 +40,16 @@ dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile
 
 出力先: `bin\Release\net10.0-windows\win-x64\publish\WindowSizer.exe`
 
+## CI / リリース
+
+- `main` への push とプルリクエストで、ビルドを確認します（[ci.yml](.github/workflows/ci.yml)）。
+- `v` で始まるタグを push すると、発行ビルドを作って GitHub Release を作成します（[release.yml](.github/workflows/release.yml)）。添付の ZIP（`WindowSizer-vX.Y.Z-win-x64.zip`）には `WindowSizer.exe` と README が入ります。
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
 ## 仕組み
 
 - `GetWindowRect`（枠を含む外側の矩形）と `GetClientRect`（クライアント領域）の差が、タイトルバー・枠線・メニューバーなどの大きさになります。
